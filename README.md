@@ -7,6 +7,7 @@ use Takeoto\State\State;
 use Takeoto\Message\NoticeMessage;
 use Takeoto\Message\ErrorMessage;
 use Takeoto\Message\WarningMessage;
+use Takeoto\State\Utility\StateUtility;
 
 $state = new State([
     new NoticeMessage('☀️The notice message.'),
@@ -15,6 +16,7 @@ $state = new State([
 ]);
 
 $state->isOk(); # false
+StateUtility::ensure($state); # Throws an exception
 
 # ---
 

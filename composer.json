@@ -7,11 +7,12 @@
     "authors": [
         {
             "name": "Vladysalv Vernyhora",
-            "homepage": "vladyslav.vernyhora@gmail.com"
+            "email": "vladyslav.vernyhora@gmail.com",
+            "homepage": "https://github.com/takeoto"
         }
     ],
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.4"
     },
     "autoload": {
         "psr-4": {

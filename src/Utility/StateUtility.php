@@ -22,8 +22,8 @@ final class StateUtility
         }
 
         $exceptionBuilder ??= static fn(?ErrorMessageInterface $firstError): \Throwable => new \RuntimeException(
-            $firstError?->__toString() ?? 'Runtime error.',
-            $firstError?->getCode() ?? 0,
+            null === $firstError ? 'Runtime error.' : $firstError->__toString() ,
+            null === $firstError ? 0 : $firstError->getCode(),
         );
         throw $exceptionBuilder($state->getMessages()->getErrors()->first(), $state);
     }
