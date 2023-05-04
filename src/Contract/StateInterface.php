@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Takeoto\State\Contract;
 
 use Takeoto\Message\Contract\MessageInterface;
+use Takeoto\Message\Contract\MessagesCollectionInterface;
 
 interface StateInterface
 {
@@ -16,9 +17,9 @@ interface StateInterface
     public function isOk(): bool;
 
     /**
-     * Gets state messages.
+     * Gets state description messages.
      *
-     * @return MessageInterface[]
+     * @return MessagesCollectionInterface<string|int,MessageInterface>
      */
-    public function getMessages(): array;
+    public function getMessages(): MessagesCollectionInterface;
 }

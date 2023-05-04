@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Takeoto\State;
 
-use Takeoto\Message\Contract\ErrorMessageInterface;
 use Takeoto\Message\Contract\MessageInterface;
+use Takeoto\Message\Contract\MessagesCollectionInterface;
+use Takeoto\Message\MessagesCollection;
 use Takeoto\State\Contract\StateInterface;
 
 class State implements StateInterface
 {
-    private bool $status;
-    private array $messages;
+    private ?bool $status;
+    private MessagesCollectionInterface $messages;
 
     /**
      * @param bool|null $status
@@ -19,8 +20,8 @@ class State implements StateInterface
      */
     public function __construct(array $messages = [], bool $status = null)
     {
-        $this->status = $status ?? $this->hasErrorMessage($messages);
-        $this->messages = $messages;
+        $this->messages = new MessagesCollection($messages);
+        $this->status = $status;
     }
 
     /**
@@ -28,29 +29,14 @@ class State implements StateInterface
      */
     public function isOk(): bool
     {
-        return $this->status;
+        return $this->status ??= $this->getMessages()->getErrors()->count() === 0;
     }
 
     /**
      * @inheritDoc
      */
-    public function getMessages(): array
+    public function getMessages(): MessagesCollectionInterface
     {
         return $this->messages;
-    }
-
-    /**
-     * @param MessageInterface[] $messages
-     * @return bool
-     */
-    private function hasErrorMessage(array $messages): bool
-    {
-        foreach ($messages as $message) {
-            if ($message instanceof ErrorMessageInterface) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
