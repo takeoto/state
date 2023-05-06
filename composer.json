@@ -4,6 +4,7 @@
     "type": "library",
     "keywords": ["takeoto", "state", "abstraction", "php"],
     "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Vladysalv Vernyhora",
@@ -13,7 +14,7 @@
     ],
     "require": {
         "php": ">=7.4",
-        "takeoto/message": "^0.1.0"
+        "takeoto/message": "dev-main"
     },
     "autoload": {
         "psr-4": {
